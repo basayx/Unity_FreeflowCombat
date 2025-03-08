@@ -10,7 +10,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private ThirdPersonController thirdPersonController;
    // [SerializeField] private GameControl gameControl;
- 
+    public StarterAssetsInputs starterAssetsInputs;
+
     [Space]
     [Header("Combat")]
     public Transform target;
@@ -34,10 +35,21 @@ public class PlayerControl : MonoBehaviour
        
     }
 
+    private bool doAttack;
     // Update is called once per frame
     void Update()
     {
-        HandleInput();
+        if (doAttack)
+        {
+            Attack(0);
+            doAttack = false;
+        }
+        
+        if (starterAssetsInputs.move == Vector2.zero && !isAttacking)
+        {
+            doAttack = true;
+        }
+        // HandleInput();
     }
 
     private void FixedUpdate()
@@ -302,10 +314,11 @@ public class PlayerControl : MonoBehaviour
 
     public void GetClose() // Animation Event ---- for Moving Close to Target
     {
-        Vector3 getCloseTarget;
+        Vector3 getCloseTarget = transform.position;
         if (target == null)
         {
-            getCloseTarget = oldTarget.transform.position;
+            if (oldTarget)
+                getCloseTarget = oldTarget.transform.position;
         }
         else
         {

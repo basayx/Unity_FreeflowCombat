@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 
@@ -10,6 +11,7 @@ public class TargetDetectionControl : MonoBehaviour
 
     [Header("Components")]
     public PlayerControl playerControl;
+    public StarterAssetsInputs starterAssetsInputs;
 
     [Header("Scene")]
     public List<Transform> allTargetsInScene = new List<Transform>();
@@ -76,7 +78,7 @@ public class TargetDetectionControl : MonoBehaviour
     {
         if (canChangeTarget)
         {
-            Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+            Vector3 inputDirection = new Vector3(starterAssetsInputs.move.x, 0, starterAssetsInputs.move.y).normalized;
 
             if (inputDirection != Vector3.zero)
             {

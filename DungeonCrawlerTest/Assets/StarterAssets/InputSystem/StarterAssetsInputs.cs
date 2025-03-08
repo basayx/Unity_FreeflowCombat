@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -20,10 +21,19 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		[Header("Joystick")] 
+		public Joystick joystick;
+
+		private void Update()
+		{
+			MoveInput(new Vector2(joystick.Horizontal, joystick.Vertical));
+			SprintInput(move.magnitude > 0.9f);
+		}
+
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+			// MoveInput(value.Get<Vector2>());
 		}
 
 		public void OnLook(InputValue value)
@@ -68,7 +78,7 @@ namespace StarterAssets
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
-			SetCursorState(cursorLocked);
+			SetCursorState(false);
 		}
 
 		private void SetCursorState(bool newState)
