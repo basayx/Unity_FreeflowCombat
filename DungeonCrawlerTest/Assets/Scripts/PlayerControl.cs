@@ -272,6 +272,7 @@ public class PlayerControl : MonoBehaviour
 
     private EnemyBase oldTarget;
     private EnemyBase currentTarget;
+    public EnemyBase CurrentTarget => currentTarget;
     public void ChangeTarget(Transform target_)
     {
         
@@ -280,7 +281,13 @@ public class PlayerControl : MonoBehaviour
             //oldTarget = target_.GetComponent<EnemyBase>(); //clear old target
             oldTarget.ActiveTarget(false);
         }
-       
+
+        if (target_ == null)
+        {
+             NoTarget();
+             return;
+        }
+        
         target = target_;
 
         oldTarget = target_.GetComponent<EnemyBase>(); //set current target
@@ -291,7 +298,8 @@ public class PlayerControl : MonoBehaviour
 
     private void NoTarget() // When player gets out of range of current Target
     {
-        currentTarget.ActiveTarget(false);
+        if (currentTarget)
+            currentTarget.ActiveTarget(false);
         currentTarget = null;
         oldTarget = null;
         target = null;

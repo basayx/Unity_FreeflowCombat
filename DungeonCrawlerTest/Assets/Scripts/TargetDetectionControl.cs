@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 
 public class TargetDetectionControl : MonoBehaviour
@@ -28,6 +30,16 @@ public class TargetDetectionControl : MonoBehaviour
     [Range(0f, 1f)] public float dotProductThreshold = 0.15f;
 
     [Space]
+    [Header("Range Display")]
+    public Transform rangeDisplayTransform;
+    private Vector3 rangeDisplayFollowOffset;
+    public DecalProjector rangeDisplayDecalProjector;
+    private Vector3 rangeDisplayDecalSize;
+    public float rangeDisplayDecalSizeMultiplier = 2f;
+    public Color rangeDisplayTargetDetectedColor;
+    private Color rangeDisplayTargetDefaultColor;
+    
+    [Space]
     [Header("Debug")]
     public bool debug;
     public Transform checkPos;
@@ -40,8 +52,23 @@ public class TargetDetectionControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rangeDisplayTransform.SetParent(null);
+        rangeDisplayFollowOffset = transform.position - rangeDisplayTransform.position;
+        rangeDisplayDecalSize = rangeDisplayDecalProjector.size;
+        rangeDisplayTargetDefaultColor = rangeDisplayDecalProjector.material.color;
+        
         PopulateTargetInScene();
         StartCoroutine(RunEveryXms());
+    }
+
+    private void Update()
+    {
+        rangeDisplayTransform.position = transform.position + rangeDisplayFollowOffset;
+        rangeDisplayDecalSize.x = detectionRange;
+        rangeDisplayDecalSize.y = detectionRange;
+        rangeDisplayDecalProjector.size = rangeDisplayDecalSize * rangeDisplayDecalSizeMultiplier;
+        
+        rangeDisplayDecalProjector.material.color = playerControl.CurrentTarget ? rangeDisplayTargetDetectedColor : rangeDisplayTargetDefaultColor;
     }
 
     private void PopulateTargetInScene()
@@ -79,42 +106,47 @@ public class TargetDetectionControl : MonoBehaviour
         if (canChangeTarget)
         {
             Vector3 inputDirection = new Vector3(starterAssetsInputs.move.x, 0, starterAssetsInputs.move.y).normalized;
-
+            
             if (inputDirection != Vector3.zero)
             {
                 inputDirection = Camera.main.transform.TransformDirection(inputDirection);
                 inputDirection.y = 0;
                 inputDirection.Normalize();
-
-
-                Transform closestEnemy = GetClosestEnemyInDirection(inputDirection);
-
-                if (closestEnemy != null && (Vector3.Distance(transform.position, closestEnemy.position)) <= detectionRange)
-                {
-                    playerControl.ChangeTarget(closestEnemy);
-                    // Do something with the closest enemy in the input direction
-                    Debug.Log("Closest enemy in direction: " + closestEnemy.name);
-                }
+            
+            
             }
 
+            Transform closestEnemy = GetClosestEnemyInDirection(inputDirection);
+
+            playerControl.ChangeTarget(closestEnemy);
+            if (closestEnemy != null)
+            {
+                // Do something with the closest enemy in the input direction
+                Debug.Log("Closest enemy in direction: " + closestEnemy.name);
+            }
         }
     }
     
     Transform GetClosestEnemyInDirection(Vector3 inputDirection)
     {
         Transform closestEnemy = null;
-        float maxDotProduct = dotProductThreshold; // Start with the threshold value
+        // float maxDotProduct = dotProductThreshold; // Start with the threshold value
+        float lastDist = Mathf.Infinity;
 
+        var center = transform.position;
         foreach (Transform enemy in allTargetsInScene)
         {
-            Vector3 enemyDirection = (enemy.position - transform.position).normalized;
-            float dotProduct = Vector3.Dot(inputDirection, enemyDirection);
+            var pos = enemy.position;
+            // Vector3 dir = (pos - center).normalized;
+            // var dotProduct = Vector3.Dot(inputDirection, dir);
 
-            if (dotProduct > maxDotProduct)
-            {
-                maxDotProduct = dotProduct;
-                closestEnemy = enemy;
-            }
+            var dist = Vector3.Distance(center, pos);
+            if (!(dist <= lastDist && dist <= detectionRange)) continue;
+            // if (!(dotProduct > maxDotProduct)) continue;
+
+            lastDist = dist;
+            // maxDotProduct = dotProduct;
+            closestEnemy = enemy;
         }
 
         return closestEnemy;
