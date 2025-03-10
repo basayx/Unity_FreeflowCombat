@@ -239,7 +239,10 @@ public class Character : Damageable, IPoolObject
         }
 
         if (IsEnemy)
-        {         
+        {
+            var enemy = GetComponent<Enemy>();
+            if (enemy)
+                enemy.Died();
         }
         else
         {
