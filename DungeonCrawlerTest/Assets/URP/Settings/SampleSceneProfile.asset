@@ -91,6 +91,7 @@ MonoBehaviour:
   - {fileID: 849379129802519247}
   - {fileID: -7893295128165547882}
   - {fileID: -7011558710299706105}
+  - {fileID: 4835121082076553493}
 --- !u!114 &849379129802519247
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -131,3 +132,53 @@ MonoBehaviour:
   maxNits:
     m_OverrideState: 0
     m_Value: 1000
+--- !u!114 &4835121082076553493
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4795284186ed54c9f07d529c2ed952, type: 3}
+  m_Name: FogOfWarURP
+  m_EditorClassIdentifier: 
+  active: 1
+  team:
+    m_OverrideState: 0
+    m_Value: 0
+  fogFarPlane:
+    m_OverrideState: 0
+    m_Value: 1
+  outsideFogStrength:
+    m_OverrideState: 1
+    m_Value: 1
+  minFogHeight:
+    m_OverrideState: 0
+    m_Value: -100000
+  maxFogHeight:
+    m_OverrideState: 0
+    m_Value: 100000
+  style:
+    m_OverrideState: 0
+    m_Value: 0
+  fogColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 0.78431374}
+  partialFogAmount:
+    m_OverrideState: 0
+    m_Value: 0.5
+  fogColorTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  fogTextureScreenSpace:
+    m_OverrideState: 0
+    m_Value: 0
+  fogColorTextureScale:
+    m_OverrideState: 0
+    m_Value: 1
+  fogColorTextureHeight:
+    m_OverrideState: 0
+    m_Value: 0
