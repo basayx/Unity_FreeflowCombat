@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4276636755379660}
   - component: {fileID: 198000543412026854}
   - component: {fileID: 199071461711780046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4741,7 +4741,7 @@ GameObject:
   - component: {fileID: 4118974426706002}
   - component: {fileID: 198296077559812788}
   - component: {fileID: 199259736821048876}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lines-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9453,7 +9453,7 @@ GameObject:
   - component: {fileID: 4457132087992496}
   - component: {fileID: 198870468615070516}
   - component: {fileID: 199942726837437640}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14138,7 +14138,7 @@ GameObject:
   - component: {fileID: 4590376998111488}
   - component: {fileID: 198454330223076434}
   - component: {fileID: 199152585556917090}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18869,7 +18869,7 @@ GameObject:
   - component: {fileID: 198077803547629316}
   - component: {fileID: 199048729948499638}
   - component: {fileID: 114112425247098702}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: hit-outer-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

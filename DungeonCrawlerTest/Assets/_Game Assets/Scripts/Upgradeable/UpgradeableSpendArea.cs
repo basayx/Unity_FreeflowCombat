@@ -48,5 +48,10 @@ public class UpgradeableSpendArea : SpendArea
             uiElement.Initialize(price.currencyData, price.priceAmount - payed);
             currencyUIElementNo++;
         }
+        
+        if (!_upgradeable.Data.IsStillNeedsToSpendForCurrentLevel())
+        {
+            AllSpentCompleted();
+        }
     }
 }

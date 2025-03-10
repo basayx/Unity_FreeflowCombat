@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3601427011867935620}
   - component: {fileID: 6895581207295219145}
   - component: {fileID: 4295057492751111772}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 7483569953275948072}
   - component: {fileID: 6919028883676367245}
   - component: {fileID: 4756284721770921541}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MeshA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 5242868727001743839}
   - component: {fileID: 8843157164019244548}
   - component: {fileID: 3855664382796993093}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MeshB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 2770891236495205637}
   - component: {fileID: 2153413345755223734}
   - component: {fileID: 6870030417793311910}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DamageNumbers - Default Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,8 +415,8 @@ MonoBehaviour:
     markColor: {r: 0, g: 0, b: 0, a: 0.5}
     horizontal: 0
     vertical: 0
-    characterSpacing: 0
-    size: -2
+    characterSpacing: -0.4
+    size: -3.4
   digitSettings:
     decimals: 1
     decimalChar: .

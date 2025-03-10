@@ -37,7 +37,7 @@ public class InGameCurrencyGainManager : MonoBehaviour
         var collectablePoolObject = ObjectPoolingManager.Instance.GetObjectFromPool(data.CollectablePrefab);
         var coinTransform = collectablePoolObject.GetGameObject().transform;
         coinTransform.position = spawnPos + Vector3.up;
-        coinTransform.rotation = Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360));
+        // coinTransform.rotation = Quaternion.Euler(Random.Range(-360, 360), Random.Range(-360, 360), Random.Range(-360, 360));
         coinTransform.DOLocalJump(Vector3.forward, 4, 1, 0.5f).SetEase(Ease.InSine)
             .OnStart(() =>
             {
@@ -45,7 +45,7 @@ public class InGameCurrencyGainManager : MonoBehaviour
             })
             .OnComplete(() =>
             {
-                GainInGameCurrency(gainValue, currencyData);
+                CurrencyManager.Instance.IncreaseCurrency(gainValue, currencyData, false);
                 
                 coinTransform.DOKill();
                 ObjectPoolingManager.Instance.ReturnObjectToPool(collectablePoolObject);

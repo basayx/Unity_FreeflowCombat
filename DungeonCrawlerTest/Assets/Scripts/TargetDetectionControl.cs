@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FoW;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -38,6 +39,11 @@ public class TargetDetectionControl : MonoBehaviour
     public float rangeDisplayDecalSizeMultiplier = 2f;
     public Color rangeDisplayTargetDetectedColor;
     private Color rangeDisplayTargetDefaultColor;
+
+    [Space] 
+    [Header("Fog of War")] 
+    public FogOfWarUnit fogOfWarUnit;
+    public float fogOfWarUnitRadiusMultiplier = 2f;
     
     [Space]
     [Header("Debug")]
@@ -71,6 +77,8 @@ public class TargetDetectionControl : MonoBehaviour
         rangeDisplayDecalProjector.size = rangeDisplayDecalSize * rangeDisplayDecalSizeMultiplier;
         
         rangeDisplayDecalProjector.material.color = playerControl.CurrentTarget ? rangeDisplayTargetDetectedColor : rangeDisplayTargetDefaultColor;
+        
+        fogOfWarUnit.circleRadius = detectionRange * fogOfWarUnitRadiusMultiplier;
     }
 
     private void PopulateTargetInScene()
@@ -138,6 +146,8 @@ public class TargetDetectionControl : MonoBehaviour
         var center = transform.position;
         foreach (Transform enemy in allTargetsInScene)
         {
+            if (!enemy) continue;
+            
             var pos = enemy.position;
             // Vector3 dir = (pos - center).normalized;
             // var dotProduct = Vector3.Dot(inputDirection, dir);

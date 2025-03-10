@@ -15,6 +15,6 @@ public class ObjectFollower : MonoBehaviour
 
     void LateUpdate()
     {
-        target.position = Vector3.MoveTowards(transform.position, target.position, smooth);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, smooth);
     }
 }

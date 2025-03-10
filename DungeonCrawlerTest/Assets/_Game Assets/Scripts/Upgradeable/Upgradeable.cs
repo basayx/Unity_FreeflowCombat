@@ -62,8 +62,9 @@ public class Upgradeable : MonoBehaviour
         {
             var t = view.transform;
             t.DOKill();
+            var scale = t.localScale;
             t.localScale = Vector3.one * 0.1f;
-            t.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutBack);
+            t.DOScale(scale, 0.25f).SetEase(Ease.OutBack);
         }
     }
 }

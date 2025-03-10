@@ -85,7 +85,7 @@ public class Damageable : MonoBehaviour
         var cols = GetComponents<Collider>().ToList();
         if (cols.Count > 0) cols.ForEach(c => c.enabled = false);
         var rb = GetComponent<Rigidbody>();
-        if (rb) rb.isKinematic = true;
+        if (rb) Destroy(rb);
     }
 
     [ContextMenu(nameof(Editor_GetHit))]

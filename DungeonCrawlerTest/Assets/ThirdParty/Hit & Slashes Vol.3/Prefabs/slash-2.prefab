@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4104272300299510}
   - component: {fileID: 198345634702883962}
   - component: {fileID: 199274349866914492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4741,7 +4741,7 @@ GameObject:
   - component: {fileID: 4125210182295166}
   - component: {fileID: 198237206840189064}
   - component: {fileID: 199366210786342794}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lines-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9453,7 +9453,7 @@ GameObject:
   - component: {fileID: 4374388571374050}
   - component: {fileID: 198548037635385498}
   - component: {fileID: 199911583182529562}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14184,7 +14184,7 @@ GameObject:
   - component: {fileID: 198644868753204056}
   - component: {fileID: 199967409158715204}
   - component: {fileID: 114686728535832558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: slash-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18986,7 +18986,7 @@ GameObject:
   - component: {fileID: 4456837026053842}
   - component: {fileID: 198253537219918202}
   - component: {fileID: 199803507139111514}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23671,7 +23671,7 @@ GameObject:
   - component: {fileID: 4768004526663520}
   - component: {fileID: 198489892144292402}
   - component: {fileID: 199818962965799900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: lines-1-sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -38,5 +38,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   valuesByLevel:
-  - 10
+  - 3
   valueIncreaseAmountPerLevel: 1

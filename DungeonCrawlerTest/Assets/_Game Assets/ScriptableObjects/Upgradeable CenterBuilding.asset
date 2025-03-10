@@ -16,4 +16,7 @@ MonoBehaviour:
   pricesByLevels:
   - prices:
     - currencyData: {fileID: 11400000, guid: 6f2feb817b7dbdf42b496211521d9337, type: 2}
+      priceAmount: 10
+  - prices:
+    - currencyData: {fileID: 11400000, guid: 6f2feb817b7dbdf42b496211521d9337, type: 2}
       priceAmount: 100

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -43,8 +44,6 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
         
-        TransformExtensions.ChangeObjectLayer(gameObject, "Enemy");
-    
         _character = GetComponent<Character>();
         _character.IsEnemy = true;
         _character.InitializeInGame();
@@ -78,7 +77,12 @@ public class Enemy : MonoBehaviour
         {
             InGameCurrencyGainManager.Instance.SpawnAndGainCurrency(transform.position, coinGainPrize);
         }
-        
+        if (throwBack)
+        {
+            var t = transform;
+            t.DOKill();
+            t.DOJump(t.position - t.forward * 1.25f, 0.5f, 1, 0.25f);
+        }
         transform.DOMoveY(transform.position.y - 3f, 1f).SetDelay(2f)
             .OnComplete(() =>
             {
@@ -100,12 +104,7 @@ public class Enemy : MonoBehaviour
             if (damageNumber)
                 damageNumber.Spawn(character.transform.position + Vector3.up, dmg);
             character.GetHit(dmg);
-            if (throwBack)
-            {
-                var t = character.transform;
-                t.DOKill();
-                t.DOJump(t.position - t.forward * 2.5f, 0.5f, 1, 0.25f);
-            }
+
 
             if (_character.IsAlive)
                 _character.GetHit(dmg);

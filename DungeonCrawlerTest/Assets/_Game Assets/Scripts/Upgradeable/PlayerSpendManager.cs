@@ -2,17 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using StarterAssets;
 using UnityEngine;
 
 public class PlayerSpendManager : MonoBehaviour
 {
+    [SerializeField] private StarterAssetsInputs starterAssetsInputs;
     [SerializeField] private float spendSpan = 0.1f;
     private float _lastSpendTime;
     
     private void OnTriggerStay(Collider col)
     {
         var spendArea = col.GetComponent<SpendArea>();
-        if (spendArea && _lastSpendTime + spendSpan <= Time.time)
+        if (spendArea && _lastSpendTime + spendSpan <= Time.time && starterAssetsInputs.move == Vector2.zero)
         {
             var prices = spendArea.GetPricesInCurrentLevel();
             if (prices != null)
@@ -23,6 +25,7 @@ public class PlayerSpendManager : MonoBehaviour
                     {
                         _lastSpendTime = Time.time;
                         DoSpend(spendArea, transform.position + Vector3.up, priceStruct.currencyData, 1);
+                        CurrencyManager.Instance.DecreaseCurrency(1, priceStruct.currencyData);
                         break;
                     }
                 }
@@ -37,7 +40,7 @@ public class PlayerSpendManager : MonoBehaviour
         var t = currency.GetGameObject().transform;
         t.DOKill();
         t.position = currencySpawnPos;
-        t.DOJump(transform.position, 1.5f, 1, 0.5f).
+        t.DOJump(spendArea.transform.position, 1.5f, 1, 0.5f).
             OnComplete(() =>
             {
                 spendArea.Refresh();

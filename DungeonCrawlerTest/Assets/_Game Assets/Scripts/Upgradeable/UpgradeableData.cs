@@ -18,7 +18,7 @@ public class UpgradeableData : ScriptableObject
     public List<PriceStruct> GetPricesInCurrentLevel()
     {
         var level = Level;
-        if (pricesByLevels.Count < level) return null; 
+        if (pricesByLevels.Count <= level) return null; 
         return pricesByLevels[level].prices;
     }
     public int GetPayedPriceAmount(int level, CurrencyData currencyData)
