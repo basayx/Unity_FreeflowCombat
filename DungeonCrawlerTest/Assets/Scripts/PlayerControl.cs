@@ -23,6 +23,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private float reachTime = 0.3f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float damagePower = 1f;
+    private Weapon _weapon;
     bool isAttacking = false;
 
     [Space]
@@ -32,7 +34,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        _weapon = GetComponentInChildren<Weapon>();
     }
 
     private bool doAttack;
@@ -59,7 +61,8 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if((Vector3.Distance(transform.position, target.position) >= TargetDetectionControl.instance.detectionRange))
+        if((Vector3.Distance(transform.position, target.position) >= TargetDetectionControl.instance.detectionRange)
+           || (target && target.TryGetComponent(out Damageable damageable) && !damageable.IsAlive))
         {
             NoTarget();
         }
@@ -266,6 +269,9 @@ public class PlayerControl : MonoBehaviour
                 // Apply force to the enemy
                 enemyRb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode.Impulse);
                 enemyBase.SpawnHitVfx(enemyBase.transform.position);
+
+                _weapon.SetTarget(enemyBase.GetComponent<Damageable>());
+                _weapon.ApplyAttack(damagePower);
             }
         }
     }

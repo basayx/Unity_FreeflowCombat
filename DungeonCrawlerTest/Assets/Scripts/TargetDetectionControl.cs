@@ -55,7 +55,9 @@ public class TargetDetectionControl : MonoBehaviour
         rangeDisplayTransform.SetParent(null);
         rangeDisplayFollowOffset = transform.position - rangeDisplayTransform.position;
         rangeDisplayDecalSize = rangeDisplayDecalProjector.size;
+        
         rangeDisplayTargetDefaultColor = rangeDisplayDecalProjector.material.color;
+        rangeDisplayDecalProjector.material = Instantiate(rangeDisplayDecalProjector.material); 
         
         PopulateTargetInScene();
         StartCoroutine(RunEveryXms());
@@ -144,6 +146,9 @@ public class TargetDetectionControl : MonoBehaviour
             if (!(dist <= lastDist && dist <= detectionRange)) continue;
             // if (!(dotProduct > maxDotProduct)) continue;
 
+            if (enemy.TryGetComponent(out Damageable damageable) && !damageable.IsAlive)
+                continue;   
+            
             lastDist = dist;
             // maxDotProduct = dotProduct;
             closestEnemy = enemy;
